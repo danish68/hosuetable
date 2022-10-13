@@ -6,7 +6,7 @@ import {
   deleteAppointmentService,
   getRemainingBillForPatientService,
 } from "../services/appointment";
-import { getMoneyByEachPet } from "../utils/utils";
+import { getMoneyByEachPet,getDefaultReport } from "../utils";
 export const getAllAppointment = async (
   req: Request,
   res: Response,
@@ -39,7 +39,7 @@ export const updateAppointment = async (
   next: any
 ) => {
   try {
-    const serviceResponse = await updateAppointmentService(req.body);
+    const serviceResponse = await updateAppointmentService(req);
     res.status(200).send(serviceResponse);
   } catch (error) {
     next(error);
@@ -52,7 +52,7 @@ export const deleteAppointment = async (
   next: any
 ) => {
   try {
-    const serviceResponse = await deleteAppointmentService(req.body);
+    const serviceResponse = await deleteAppointmentService(req);
     res.status(200).send(serviceResponse);
   } catch (error) {
     next(error);
@@ -77,16 +77,20 @@ export const getRemainingBillForPatient = async (
   }
 };
 
-export const getMoneyForEachPet = async (
+export const getReport = async (
   req: Request,
   res: Response,
   next: any
 ) => {
+  const {type}=req.query
   try {
     const serviceResponse = await getAllAppointmentService({});
-    const result = getMoneyByEachPet(serviceResponse);
+    console.log("type",type)
+    const result=type==="moneyByPet"? getMoneyByEachPet(serviceResponse):getDefaultReport(serviceResponse);
     res.status(200).send({ result });
   } catch (error) {
     next(error);
   }
 };
+
+

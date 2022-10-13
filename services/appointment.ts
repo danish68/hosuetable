@@ -1,30 +1,5 @@
 import Appointment from "../models/appointment";
-
-const queryBuilder = (data: any) => {
-  const keys = Object.keys(data);
-  if (keys.includes("paid")) {
-    return {
-      paid: data.paid,
-    };
-  } else if (keys.includes("date")) {
-    const date = data.date;
-    const begin = new Date(date);
-    const lastHours = new Date(date).setHours(23, 59, 56, 999);
-    const end = new Date(lastHours);
-    return {
-      startTime: {
-        $gte: begin,
-        $lte: end,
-      },
-    };
-  } else if (keys.includes("petId")) {
-    return {
-      petId: data.petId,
-    };
-  } else {
-    return {};
-  }
-};
+import { queryBuilder } from "../utils";
 
 export const getAllAppointmentService = async (DTO: any) => {
   const queryString = queryBuilder(DTO);
@@ -42,15 +17,20 @@ export const createAppointmentService = async (DTO: any) => {
 };
 
 export const updateAppointmentService = async (DTO: any) => {
-  const { id, ...restDto } = DTO;
+  const {
+    query: { id },
+    body,
+  } = DTO;
   let updateAppointment: any = await Appointment.findByIdAndUpdate(id, {
-    ...restDto,
+    ...body,
   });
   return updateAppointment;
 };
 
 export const deleteAppointmentService = async (DTO: any) => {
-  const { id } = DTO;
+  const {
+    query: { id },
+  } = DTO;
   const deleteAppointment = await Appointment.findByIdAndRemove(id);
   return deleteAppointment;
 };

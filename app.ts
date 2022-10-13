@@ -12,7 +12,6 @@ app.use(bodyParser.json());
 app.use("/patient", Patient);
 app.use("/appointment", Appointment);
 
-
 (() => {
   try {
     const mongooseConnect = mongoose.connect(

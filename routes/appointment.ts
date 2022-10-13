@@ -5,14 +5,15 @@ import {
   updateAppointment,
   deleteAppointment,
   getRemainingBillForPatient,
-  getMoneyForEachPet,
+  getReport,
 } from "../controllers/appointment";
+import { Validate } from "../middleware/validator";
 const router = express.Router();
 router.get("/all", getAllAppointment);
 router.get("/bill/:petId/", getRemainingBillForPatient);
-router.post("/", createAppointment);
-router.put("/", updateAppointment);
+router.post("/", Validate("appointment"), createAppointment);
+router.put("/", Validate("appointment"), updateAppointment);
 router.delete("/", deleteAppointment);
-router.get("/moneyByPet", getMoneyForEachPet);
+router.get("/report", getReport);
 
 export default router;

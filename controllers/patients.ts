@@ -21,6 +21,7 @@ export const getAllPatients = async (
 
 export const addNewPatient = async (req: Request, res: Response, next: any) => {
   try {
+    console.log("req.bosy",req.body)
     const serviceResponse = await addNewPatientService(req.body);
     res.status(201).send(serviceResponse);
   } catch (error) {
@@ -30,7 +31,7 @@ export const addNewPatient = async (req: Request, res: Response, next: any) => {
 
 export const updatePatient = async (req: Request, res: Response, next: any) => {
   try {
-    const serviceResponse = await updatePatientService(req.body);
+    const serviceResponse = await updatePatientService(req);
     res.status(201).send(serviceResponse);
   } catch (error) {
     next(error);
@@ -39,7 +40,7 @@ export const updatePatient = async (req: Request, res: Response, next: any) => {
 
 export const deletePatient = async (req: Request, res: Response, next: any) => {
   try {
-    const serviceResponse = await deletePatientService(req.body);
+    const serviceResponse = await deletePatientService(req);
     res.status(201).json(serviceResponse);
   } catch (error) {
     next(error);
