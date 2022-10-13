@@ -23,8 +23,7 @@ export const updatePatientService = async (DTO: any) => {
 export const deletePatientService = async (DTO: any) => {
   const { id } = DTO;
 
- Patient.findByIdAndRemove(id, (d:any) => {
-    return  {status:"patient deleted successfully"}
+  Patient.findByIdAndRemove(id, (d: any) => {
+    return { status: "patient deleted successfully" };
   });
 };
-

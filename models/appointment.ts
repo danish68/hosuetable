@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const appointmentsSchema = new mongoose.Schema(
   {
-    petId: { type: mongoose.Types.ObjectId, required: true, ref:'Patients' },
+    petId: { type: mongoose.Types.ObjectId, required: true, ref: "Patients" },
     startTime: { type: Date },
     endTime: { type: Date },
     desc: { type: String },
