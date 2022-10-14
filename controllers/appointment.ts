@@ -82,11 +82,10 @@ export const getReport = async (
   res: Response,
   next: any
 ) => {
-  const {type}=req.query
   try {
     const serviceResponse = await getAllAppointmentService({});
-    console.log("type",type)
-    const result=type==="moneyByPet"? getMoneyByEachPet(serviceResponse):getDefaultReport(serviceResponse);
+
+    const result=req.query?.type==="moneyByPet"? getMoneyByEachPet(serviceResponse):getDefaultReport(serviceResponse);
     res.status(200).send({ result });
   } catch (error) {
     next(error);

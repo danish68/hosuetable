@@ -12,8 +12,8 @@ export const appointmentSchema = Joi.object({
   petId: Joi.string()
     .regex(/^[0-9a-fA-F]{24}$/)
     .message("must be an oid"),
-  startTime: Joi.date(),
-  endTime: Joi.date(),
+  startTime: Joi.date().iso(),
+  endTime: Joi.date().iso(),
   desc: Joi.string(),
   appointmentStatus: Joi.string(),
   fee: Joi.number(),

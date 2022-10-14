@@ -11,7 +11,7 @@ import { Validate } from "../middleware/validator";
 const router = express.Router();
 router.get("/all", getAllAppointment);
 router.get("/bill/:petId/", getRemainingBillForPatient);
-router.post("/", Validate("appointment"), createAppointment);
+router.post("/new", Validate("appointment"), createAppointment);
 router.put("/", Validate("appointment"), updateAppointment);
 router.delete("/", deleteAppointment);
 router.get("/report", getReport);
