@@ -46,7 +46,7 @@ export const deleteAppointment = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const serviceResponse = await deleteAppointmentService(req);
     if (!serviceResponse) {
-      next(new HttpError("Not able tp delete", 404));
+      next(new HttpError("Not able to delete", 404));
     } else {
       res.status(200).send(serviceResponse);
     }

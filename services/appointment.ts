@@ -21,18 +21,16 @@ export const updateAppointmentService = async (DTO: any) => {
     query: { id },
     body,
   } = DTO;
-  let updateAppointment: any = await Appointment.findByIdAndUpdate(id, {
+  return await Appointment.findByIdAndUpdate(id, {
     ...body,
   });
-  return updateAppointment;
 };
 
 export const deleteAppointmentService = async (DTO: any) => {
   const {
     query: { id },
   } = DTO;
-  const deleteAppointment = await Appointment.findByIdAndRemove(id);
-  return deleteAppointment;
+  return await Appointment.findByIdAndRemove(id);
 };
 
 export const getRemainingBillForPatientService = async (DTO: any) => {

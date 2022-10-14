@@ -42,12 +42,11 @@ export const updatePatient = asyncHandler(
 
 export const deletePatient = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    
-      const serviceResponse:any = await deletePatientService(req);
-      if (!serviceResponse) {
-        next(new HttpError("Not Able to Deleted", 404));
-      } else {
-        res.status(200).send(serviceResponse);
-      }
+    const serviceResponse: any = await deletePatientService(req);
+    if (!serviceResponse) {
+      next(new HttpError("Not Able to Deleted", 404));
+    } else {
+      res.status(200).send(serviceResponse);
+    }
   }
 );

@@ -1,4 +1,4 @@
-import Patient from "../models/patient"; 
+import Patient from "../models/patient";
 export const getAllPatientsService = async () => {
   return await Patient.find();
 };
@@ -11,19 +11,19 @@ export const addNewPatientService = async (DTO: any) => {
 };
 
 export const updatePatientService = async (DTO: any) => {
-  const { query:{id}, body } = DTO;
-  let updatePatient: any = Patient.findByIdAndUpdate(
-    id,
-    { ...body }
-  );
+  const {
+    query: { id },
+    body,
+  } = DTO;
+  let updatePatient: any = Patient.findByIdAndUpdate(id, { ...body });
 
   return await updatePatient.save();
 };
 
 export const deletePatientService = async (DTO: any) => {
-  const { query:{id} } = DTO;
+  const {
+    query: { id },
+  } = DTO;
 
-  Patient.findByIdAndRemove(id, (d: any) => {
-    return { status: "patient deleted successfully" };
-  });
+  return await Patient.findByIdAndRemove(id);
 };
