@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import Cors from "cors";
 import Patient from "./routes/patient";
 import Appointment from "./routes/appointment";
+import ErrorValidator from "./middleware/errorHandler";
 
 const app = express();
 app.use(Cors());
@@ -11,6 +12,8 @@ app.use(bodyParser.json());
 
 app.use("/patient", Patient);
 app.use("/appointment", Appointment);
+
+app.use(ErrorValidator);
 
 (() => {
   try {
